@@ -13,7 +13,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.example.healthyeating.ListViewAdapters.ImageListAdapter;
-import com.example.healthyeating.data.RetriveData;
+import com.example.healthyeating.data.VideoListTask;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -41,7 +41,7 @@ public class HomePage extends Activity {
         //Calls the method to populate the top 5 list view with all the needed information
         populateTop20ListView(top20ListView);
         
-        RetriveData temp = new RetriveData();
+        VideoListTask temp = new VideoListTask();
         temp.execute();
     }
 
