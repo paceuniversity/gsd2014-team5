@@ -43,20 +43,24 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 
 	private LayoutInflater mInflater;
 	
-	private ArrayList<String> albumNames;
+	private ArrayList<String> dishNames;
+	private ArrayList<String> dishDescription;
+	private ArrayList<String> dishServes;
 	private TypedArray mIcons;
 	private ArrayList<Bitmap> albumArt;
 	private int mViewResourceId;
 	private HashMap<String, Integer> albumTitlePosition;
 
 	public ImageListAdapter(Context ctx, int viewResourceId,
-			ArrayList<String> arrayList) {
-		super(ctx, viewResourceId, arrayList);
+			ArrayList<String> _dishNames, ArrayList<String> _dishDescription, ArrayList<String> _dishServes) {
+		super(ctx, viewResourceId, _dishNames);
 		
 		mInflater = (LayoutInflater)ctx.getSystemService(
 				Context.LAYOUT_INFLATER_SERVICE);
 		
-		albumNames = arrayList;
+		dishNames = _dishNames;
+		dishDescription = _dishDescription;
+		dishServes = _dishServes;
 		
 		mViewResourceId = viewResourceId;
 		albumTitlePosition = new HashMap<String, Integer>();
@@ -64,12 +68,12 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 
 	@Override
 	public int getCount() {
-		return albumNames.size();
+		return dishNames.size();
 	}
 
 	@Override
 	public String getItem(int position) {
-		return albumNames.get(position);
+		return dishNames.get(position);
 	}
 
 	@Override
@@ -87,20 +91,25 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		convertView = mInflater.inflate(mViewResourceId, null);
 
+		//Sets the dish image retrieved from the server to the item within the list view
 		ImageView dishImage = (ImageView)convertView.findViewById(R.id.dishImage);
 		dishImage.setImageResource(R.drawable.ic_launcher);
-
+		
+		//Sets the image for rating retrieved from the server to the item within the list view
 		ImageView dishRating = (ImageView)convertView.findViewById(R.id.dishRating);
 		dishRating.setImageResource(R.drawable.three_stars);
 		
+		//Sets the dish name retrieved from the server to the item within the list view
 		TextView dishName = (TextView)convertView.findViewById(R.id.dishName);
-		dishName.setText("Dish_Name");
+		dishName.setText(dishNames.get(position));
 		
+		//Sets the serving size retrieved from the server to the item within the list view
 		TextView servings = (TextView)convertView.findViewById(R.id.dishServes);
-		servings.setText("Serves: 4");
+		servings.setText("Serves: " + dishServes.get(position));
 		
+		//Sets the discription retrieved from the server to the item within the list view
 		TextView discription = (TextView)convertView.findViewById(R.id.dishDiscription);
-		discription.setText("This will be a very breif discription on the dish");
+		discription.setText(dishDescription.get(position));
 		return convertView;
 	}
 }

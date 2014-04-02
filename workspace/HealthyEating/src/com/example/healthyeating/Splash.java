@@ -12,6 +12,8 @@ public class Splash extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
         
+        //This activity is the splash screen what this thread does is simply run
+        //for 5 seconds displaying a image "our app log" and the starts the actual aplication
         Thread splashTimer = new Thread(){
         	
         	public void run() {
