@@ -27,8 +27,6 @@ package com.example.healthyeating.ListViewAdapters;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.example.healthyeating.*;
-import com.example.healthyeating.data.ImageLoaderTask;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -52,7 +50,6 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 	private ArrayList<Bitmap> albumArt;
 	private int mViewResourceId;
 	private HashMap<String, Integer> albumTitlePosition;
-	
 
 	public ImageListAdapter(Context ctx, int viewResourceId,
 			ArrayList<String> _dishNames, ArrayList<String> _dishDescription, ArrayList<String> _dishServes) {
@@ -67,9 +64,6 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 		
 		mViewResourceId = viewResourceId;
 		albumTitlePosition = new HashMap<String, Integer>();
-		
-		//Image Loader to get images from server download them and add them to list view
-
 	}
 
 	@Override
@@ -99,9 +93,7 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 
 		//Sets the dish image retrieved from the server to the item within the list view
 		ImageView dishImage = (ImageView)convertView.findViewById(R.id.dishImage);
-		ImageLoaderTask imageLoader = new ImageLoaderTask(dishImage);
-		imageLoader.execute("http://turbotri.com/gsd2014team5/images/ic_launcher.png");
-		//dishImage.setImageResource(R.drawable.ic_launcher);
+		dishImage.setImageResource(R.drawable.ic_launcher);
 		
 		//Sets the image for rating retrieved from the server to the item within the list view
 		ImageView dishRating = (ImageView)convertView.findViewById(R.id.dishRating);
