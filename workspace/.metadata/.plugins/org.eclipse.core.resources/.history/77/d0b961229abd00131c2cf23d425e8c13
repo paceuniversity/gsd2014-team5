@@ -26,8 +26,6 @@ package com.example.healthyeating.ListViewAdapters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
-
 import com.example.healthyeating.*;
 import com.example.healthyeating.data.ImageLoaderTask;
 
@@ -109,15 +107,7 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 		else{
 		ImageLoaderTask imageLoader = new ImageLoaderTask(dishImage);
 		imageLoader.execute("http://turbotri.com/gsd2014team5/images/ic_launcher.png");
-		try {
-			dishImages.add(position, imageLoader.get());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dishImages.add(position, imageLoader.get());
 		}
 		//dishImage.setImageResource(R.drawable.ic_launcher);
 		

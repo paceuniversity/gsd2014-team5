@@ -10,9 +10,10 @@ import android.widget.ImageView;
 
 public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap>{
 	ImageView recipeListViewImageView;
-	
+	int position;
 	  public ImageLoaderTask(ImageView input_recipeListViewImageView) {
 	      this.recipeListViewImageView = input_recipeListViewImageView;
+	      int postion = _position;
 	  }
 
 	  protected Bitmap doInBackground(String... urls) {

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap>{
 	ImageView recipeListViewImageView;
-	
+
 	  public ImageLoaderTask(ImageView input_recipeListViewImageView) {
 	      this.recipeListViewImageView = input_recipeListViewImageView;
 	  }
@@ -31,5 +31,5 @@ public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap>{
 	  protected void onPostExecute(Bitmap result) {
 		  recipeListViewImageView.setImageBitmap(result);
 	  }
-	  
+
 	}
