@@ -56,7 +56,7 @@ public class RetriveData extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			Top5 = new JsonParser(getJSONObject("http://turbotri.com/gsd2014team5Top5.json"));
+			Top5 = new JsonParser(getJSONObject("http://turbotri.com/gsd2014team5/getContent.php"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

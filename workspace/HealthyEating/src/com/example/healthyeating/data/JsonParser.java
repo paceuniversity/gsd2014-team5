@@ -32,7 +32,7 @@ public class JsonParser {
 		ArrayList<String> DishDescrip = new ArrayList<String>();
 		ArrayList<String> DishRating = new ArrayList<String>();
 		ArrayList<String> DishServes = new ArrayList<String>();
-		JSONArray  top5 = mainObject.getJSONArray("top5");
+		JSONArray  top5 = mainObject.getJSONArray("Top5");
 		
 		for(int i =0; i<top5.length(); i++){
 			JSONObject dishObj = top5.getJSONObject(i);
