@@ -26,16 +26,11 @@ package com.example.healthyeating.ListViewAdapters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
-
 import com.example.healthyeating.*;
-import com.example.healthyeating.data.ImageLoaderTask;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.LocalSocketAddress.Namespace;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,12 +46,10 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 	private ArrayList<String> dishNames;
 	private ArrayList<String> dishDescription;
 	private ArrayList<String> dishServes;
-	private ArrayList<Bitmap> dishImages;
 	private TypedArray mIcons;
 	private ArrayList<Bitmap> albumArt;
 	private int mViewResourceId;
 	private HashMap<String, Integer> albumTitlePosition;
-	
 
 	public ImageListAdapter(Context ctx, int viewResourceId,
 			ArrayList<String> _dishNames, ArrayList<String> _dishDescription, ArrayList<String> _dishServes) {
@@ -68,12 +61,9 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 		dishNames = _dishNames;
 		dishDescription = _dishDescription;
 		dishServes = _dishServes;
-		dishImages = new ArrayList<Bitmap>();
+		
 		mViewResourceId = viewResourceId;
 		albumTitlePosition = new HashMap<String, Integer>();
-		
-		//Image Loader to get images from server download them and add them to list view
-
 	}
 
 	@Override
@@ -103,23 +93,7 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 
 		//Sets the dish image retrieved from the server to the item within the list view
 		ImageView dishImage = (ImageView)convertView.findViewById(R.id.dishImage);
-		if(dishImages.size()-1 >= position && dishImages.get(position)!=null){
-			dishImage.setImageBitmap(dishImages.get(position));
-		}
-		else{
-		ImageLoaderTask imageLoader = new ImageLoaderTask(dishImage);
-		imageLoader.execute("http://turbotri.com/gsd2014team5/images/ic_launcher.png");
-		try {
-			dishImages.add(position, imageLoader.get());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		}
-		//dishImage.setImageResource(R.drawable.ic_launcher);
+		dishImage.setImageResource(R.drawable.ic_launcher);
 		
 		//Sets the image for rating retrieved from the server to the item within the list view
 		ImageView dishRating = (ImageView)convertView.findViewById(R.id.dishRating);

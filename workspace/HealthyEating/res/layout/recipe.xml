@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/MainImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/CookingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_toRightOf="@+id/MainImage"
+        android:text="Cooking Time: "
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/RecipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/MainImage"
+        android:text="Recipe Name: "
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CookingTime"
+        android:layout_below="@+id/RecipeName"
+        android:text="Author: "
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/ServingSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CookingTime"
+        android:layout_below="@+id/CookingTime"
+        android:text="Serving Size: "
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/Description"
+        android:layout_below="@+id/DescriptionContent"
+        android:layout_marginTop="38dp"
+        android:text="Ingredients"
+        android:textStyle="bold" />
+    
+        <TextView
+        android:id="@+id/NameContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/RecipeName"
+        android:layout_alignBottom="@+id/RecipeName"
+        android:layout_toRightOf="@+id/RecipeName" 
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/AuthorContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ImageView02"
+        android:layout_below="@+id/NameContent" 
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/TimeContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/CookingTime"
+        android:layout_alignBottom="@+id/CookingTime"
+        android:layout_toRightOf="@+id/CookingTime" 
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/ServingContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ServingSize"
+        android:layout_alignBottom="@+id/ServingSize"
+        android:layout_alignRight="@+id/ImageView03" 
+        android:text=""/>
+    
+    <TextView
+        android:id="@+id/IngredientsContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Ingredients"
+        android:text="" /> 
+
+    <TextView
+        android:id="@+id/DescriptionContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Description"
+        android:layout_centerHorizontal="true"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/Steps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/IngredientsContent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Steps"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/StepsContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/IngredientsContent"
+        android:layout_below="@+id/Steps"
+        android:layout_marginTop="18dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MainImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp"
+        android:text="Description"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ImageView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/MainImage"
+        android:layout_below="@+id/MainImage"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignTop="@+id/ImageView04"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ImageView02"
+        android:layout_toRightOf="@+id/ImageView02"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MainImage"
+        android:layout_toRightOf="@+id/ImageView01"
+        android:src="@drawable/ic_launcher" />
+
+</RelativeLayout>
