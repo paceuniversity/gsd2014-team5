@@ -19,18 +19,26 @@ import com.example.healthyeating.data.JsonParser;
 import com.example.healthyeating.data.RetriveData;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
-public class HomePage extends Activity {
+public class HomePage extends Activity implements OnItemClickListener, OnTabChangeListener{
 	
 	//------Top 5 Recipes--------///
 	ListView top20ListView; // list view for top 10 recipes on home page
 	ImageListAdapter top20adabter;
+	ListView allRecipesListView;
 	//---------------------------///
 	private ArrayList<String> temp;
 	
@@ -40,7 +48,7 @@ public class HomePage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         top20ListView = (ListView) findViewById(R.id.top20); // Initializes the list view
-
+        allRecipesListView = (ListView) findViewById(R.id.allReecipesListView);
         //Class method to set up the tap host 
         setUpTabHost();
         
@@ -65,6 +73,7 @@ public class HomePage extends Activity {
     	
 		top20adabter = new ImageListAdapter(getApplicationContext(), R.layout.image_list_item, dishName, dishDescription, dishServes);
 		top20ListView.setAdapter(top20adabter); //Populates the list view one the home page with the top 5 recipes
+		top20ListView.setOnItemClickListener(this);
     }
     
     
@@ -74,6 +83,7 @@ public class HomePage extends Activity {
   		
   				TabHost th = (TabHost) findViewById(R.id.tabhost);
   			    th.setup();
+  			    th.setOnTabChangedListener(this);
   			    
   			    //---Adds Home Tab to TabHost---//
   			    TabSpec specs = th.newTabSpec("tab1");
@@ -95,6 +105,26 @@ public class HomePage extends Activity {
   			    
   		//_____________________________________________________//
   	}
+
+
+@Override
+public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+	Intent RecipeFullView = new Intent("com.example.healthyeating.RecipeFullView");
+	startActivity(RecipeFullView);
+	
+}
+
+
+@Override
+public void onTabChanged(String tabID) {
+	if(tabID.equals("tab2")){
+		Intent startRecipesAct = new Intent("com.example.healthyeating.RecipesMain");
+		startActivity(startRecipesAct);
+	}
+	
+}
+
+
     
   	
   	

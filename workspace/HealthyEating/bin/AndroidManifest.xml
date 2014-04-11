@@ -39,6 +39,28 @@
             </intent-filter>
         </activity>
         
+        <!-- Activity called when a recipe from listview is clicked on -->
+        <activity
+            android:name="com.example.healthyeating.RecipeFullView"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.example.healthyeating.RecipeFullView" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         <!-- Activity called when tap2 "Recipes" is clicked on -->
+        <activity
+            android:name="com.example.healthyeating.RecipesMain"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.example.healthyeating.RecipesMain" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
         
     </application>
 

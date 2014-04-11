@@ -22,7 +22,8 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
-        public static final int three_stars=0x7f020001;
+        public static final int textlview_rounded_corners=0x7f020001;
+        public static final int three_stars=0x7f020002;
     }
     public static final class id {
         public static final int AuthorContent=0x7f080015;
@@ -43,13 +44,15 @@ public final class R {
         public static final int Steps=0x7f08001b;
         public static final int StepsContent=0x7f08001c;
         public static final int TimeContent=0x7f080017;
-        public static final int action_settings=0x7f08001f;
+        public static final int action_settings=0x7f080021;
+        public static final int allReecipesListView=0x7f080020;
         public static final int dishDiscription=0x7f08000a;
         public static final int dishImage=0x7f080007;
         public static final int dishName=0x7f080008;
         public static final int dishRating=0x7f08000b;
         public static final int dishServes=0x7f080009;
         public static final int homeHealthFacts=0x7f080002;
+        public static final int recipesCatogoryTV=0x7f08001f;
         public static final int tab1=0x7f080001;
         public static final int tab2=0x7f080005;
         public static final int tab3=0x7f080006;
@@ -59,10 +62,10 @@ public final class R {
         public static final int top5Recipes=0x7f080003;
     }
     public static final class layout {
-        public static final int gittest=0x7f030000;
-        public static final int home_page=0x7f030001;
-        public static final int image_list_item=0x7f030002;
-        public static final int recipe=0x7f030003;
+        public static final int home_page=0x7f030000;
+        public static final int image_list_item=0x7f030001;
+        public static final int recipe=0x7f030002;
+        public static final int recipesmain=0x7f030003;
         public static final int splash=0x7f030004;
     }
     public static final class menu {

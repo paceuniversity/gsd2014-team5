@@ -1,0 +1,12 @@
+package com.example.healthyeating;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class RecipesMain extends Activity{
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		setContentView(R.layout.recipesmain);
+		super.onCreate(savedInstanceState);
+	}
+}

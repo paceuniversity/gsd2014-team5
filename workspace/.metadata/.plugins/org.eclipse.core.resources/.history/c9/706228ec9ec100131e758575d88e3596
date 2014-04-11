@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    android:orientation="vertical" >
+
+    <TabHost
+        android:id="@+id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.17" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+                
+					
+    	<!-- Home Page Layout Begines -->			
+                <LinearLayout
+                    android:id="@+id/tab1"
+                   	android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"  >
+                    
+                    <LinearLayout
+                    android:id="@+id/homeHealthFacts"
+                   	android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:orientation="vertical"  >
+                    
+                    </LinearLayout>
+                    
+                    <TextView android:id="@+id/top5Recipes"
+                   	android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:text="Top 5"
+                    android:gravity="center"/>
+                    
+                    <ListView
+       					android:id="@+id/top20"
+        				android:layout_width="match_parent"
+        				android:layout_height="match_parent">
+    				</ListView>
+    				
+                </LinearLayout>
+		<!-- Home Page Layout Ends -->
+		
+		
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" 
+                    android:orientation="horizontal" >
+                    
+                    <RelativeLayout 
+                    android:id="@+id/tab2Holder"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" 
+                    android:orientation="horizontal"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:layout_gravity="center_horizontal">
+                    
+                    <Button
+                    android:id="@+id/AllRecipes"
+                    android:layout_width= "100dp"
+                    android:layout_height="40dp" 
+                    android:scaleType="center"
+                    android:layout_alignParentTop="true"
+					android:background="@drawable/textlview_rounded_corners" />
+                    
+                    <Button
+                    android:id="@+id/TopRatedRecipes"
+                    android:layout_width= "98dp"
+                    android:layout_height="48dp" 
+                    android:scaleType="center"
+					android:layout_toRightOf="@+id/AllRecipes"
+					android:background="@drawable/textlview_rounded_corners" />
+                    
+                    <Button
+                    android:id="@+id/FavRatedRecipes"
+                    android:layout_width= "95dp"
+                    android:layout_height="45dp" 
+                    android:scaleType="center"
+                    android:layout_toRightOf="@+id/TopRatedRecipes"
+					android:background="@drawable/textlview_rounded_corners" />
+                     
+    				
+    				<LinearLayout
+    				android:layout_width="match_parent"
+                    android:layout_height="fill_parent" 
+                    android:orientation="vertical"
+                    android:layout_below="@+id/AllRecipes"
+                    android:background="#88888888">
+    				    
+    				</LinearLayout>
+                    
+                   </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" 
+                    android:orientation="vertical" >
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
