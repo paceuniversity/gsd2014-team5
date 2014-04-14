@@ -18,6 +18,7 @@ import com.example.healthyeating.data.JSONLib;
 import com.example.healthyeating.data.JsonParser;
 import com.example.healthyeating.data.RetriveData;
 
+import ListViewPopulate.PopulateListViews;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,18 +29,31 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
-public class HomePage extends Activity implements OnItemClickListener, OnTabChangeListener{
+public class HomePage extends Activity implements OnItemClickListener, OnTabChangeListener, android.view.View.OnClickListener{
 	
 	//------Top 5 Recipes--------///
 	ListView top20ListView; // list view for top 10 recipes on home page
 	ImageListAdapter top20adabter;
-	ListView allReecipesListView;
+	
+	
 	//---------------------------///
+	
+	//-----Recipes Tap-----------//
+	Button allRecipesButton;
+	Button newestRecipes;
+	Button topRatedRecipes;
+	ListView allReecipesListView;
+	ImageListAdapter allRecipes = null;
+	ImageListAdapter newestRecipesAdapter = null;
+	//--------------------------//
+	
+	
 	private ArrayList<String> temp;
 	
 	
@@ -56,7 +70,12 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
        // getData.sendActInfo();
         getData.execute();
   
-
+        
+        //-------Recipes Tap------------------//
+        allRecipesButton = (Button) findViewById(R.id.allRecipesB);
+        allRecipesButton.setOnClickListener(this);
+        newestRecipes = (Button) findViewById(R.id.newestRecipesB);
+        newestRecipes.setOnClickListener(this);
     }
 
 
@@ -118,13 +137,45 @@ public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 @Override
 public void onTabChanged(String tabID) {
 	if(tabID.equals("tab2")){
-		allReecipesListView.setAdapter(top20adabter);
+		
+		if(allRecipes==null){
+			allRecipes = PopulateListViews.populate(allRecipes, getApplicationContext(), PopulateListViews.ALL_RECIPES);
+		}
+		
+		allReecipesListView.setAdapter(allRecipes);
 		allReecipesListView.setOnItemClickListener(this);
-		//Intent startRecipesAct = new Intent("com.example.healthyeating.RecipesMain");
-		//startActivity(startRecipesAct);
 	}
 	
 }
+
+
+@Override
+public void onClick(View v) {
+
+switch (v.getId()) {
+case R.id.allRecipesB:
+	if(allRecipes==null){
+		allRecipes = PopulateListViews.populate(allRecipes, getApplicationContext(), PopulateListViews.ALL_RECIPES);
+	}
+	
+	allReecipesListView.setAdapter(allRecipes);
+	break;
+
+case R.id.newestRecipesB:
+	if(newestRecipesAdapter==null){
+		newestRecipesAdapter = PopulateListViews.populate(newestRecipesAdapter, getApplicationContext(), PopulateListViews.NEW_RECIPES);
+	}
+	allReecipesListView.setAdapter(newestRecipesAdapter);
+	break;
+	
+default:
+	break;
+}
+	
+}
+
+
+
 
 
     

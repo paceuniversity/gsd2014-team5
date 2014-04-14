@@ -1,0 +1,79 @@
+package ListViewPopulate;
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.widget.Adapter;
+
+import com.example.healthyeating.R;
+import com.example.healthyeating.ListViewAdapters.ImageListAdapter;
+
+
+public abstract class PopulateListViews {
+
+	public static final int ALL_RECIPES = 0;
+	public static final int NEW_RECIPES = 1;
+	public static final int FAV_RECIPES = 2;
+	
+	
+	public static ImageListAdapter populate(ImageListAdapter dstAdabter, Context ctx, int listViewCode){
+		switch (listViewCode) {
+		case 0: 
+			
+			dstAdabter = populateAllRecipes(dstAdabter, ctx);
+			
+			break;
+
+		case 1:
+			dstAdabter = populateNewestRecipes(dstAdabter, ctx);
+			break;
+			
+		case 2:
+	
+		break;
+		default:
+			break;
+		}
+		return dstAdabter;
+	}
+	
+	
+//Returns the newest add recipes to add to the list view	
+public static ImageListAdapter populateNewestRecipes(ImageListAdapter adapter, Context act){
+		
+		ArrayList<String> dishName = new ArrayList<String>();
+		ArrayList<String> dishServes = new ArrayList<String>();
+		ArrayList<String> dishDescription = new ArrayList<String>();
+		dishName.add("NEW");
+		dishName.add("NEW");
+		dishServes.add("NEW");
+		dishServes.add("NEW");
+		dishDescription.add("NEW");
+		dishDescription.add("NEW");
+		
+		adapter = new ImageListAdapter(act, R.layout.image_list_item, dishName, dishDescription, dishServes);
+		
+		return adapter;
+	}
+	
+	
+	
+	
+	static ImageListAdapter populateAllRecipes(ImageListAdapter adapter, Context act){
+		
+		ArrayList<String> dishName = new ArrayList<String>();
+		ArrayList<String> dishServes = new ArrayList<String>();
+		ArrayList<String> dishDescription = new ArrayList<String>();
+		dishName.add("ALL");
+		dishName.add("ALL");
+		dishServes.add("ALL");
+		dishServes.add("ALL");
+		dishDescription.add("ALL");
+		dishDescription.add("ALL");
+		
+		adapter = new ImageListAdapter(act, R.layout.image_list_item, dishName, dishDescription, dishServes);
+		
+		return adapter;
+	}
+	
+}

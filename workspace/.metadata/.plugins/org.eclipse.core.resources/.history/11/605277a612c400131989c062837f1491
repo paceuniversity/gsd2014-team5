@@ -1,0 +1,56 @@
+package ListViewPopulate;
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.widget.Adapter;
+
+import com.example.healthyeating.R;
+import com.example.healthyeating.ListViewAdapters.ImageListAdapter;
+
+
+public abstract class PopulateListViews {
+
+	public static final int ALL_RECIPES = 0;
+	public static final int NEW_RECIPES = 1;
+	public static final int FAV_RECIPES = 2;
+	
+	
+	public static void populate(ImageListAdapter dstAdabter, Activity act, int listViewCode){
+		switch (listViewCode) {
+		case 0: 
+			
+			populateAllRecipes(dstAdabter, act);
+			
+			break;
+
+		case 1:
+			
+			break;
+			
+		case 2:
+	
+		break;
+		default:
+			break;
+		}
+	}
+	
+	
+	
+	static void populateAllRecipes(ImageListAdapter adapter, Activity act){
+		
+		ArrayList<String> dishName = new ArrayList<String>();
+		ArrayList<String> dishServes = new ArrayList<String>();
+		ArrayList<String> dishDescription = new ArrayList<String>();
+		dishName.add("NULL");
+		dishName.add("NULL");
+		dishServes.add("NULL");
+		dishServes.add("NULL");
+		dishDescription.add("NULL");
+		dishDescription.add("NULL");
+		
+		adapter = new ImageListAdapter(act, R.layout.image_list_item, dishName, dishDescription, dishServes);
+	}
+	
+	
+}

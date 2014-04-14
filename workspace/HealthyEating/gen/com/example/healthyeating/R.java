@@ -45,7 +45,7 @@ public final class R {
         public static final int StepsContent=0x7f080021;
         public static final int TimeContent=0x7f08001c;
         public static final int action_settings=0x7f080024;
-        public static final int allRecipes=0x7f080007;
+        public static final int allRecipesB=0x7f080007;
         public static final int allReecipesListView=0x7f08000a;
         public static final int dishDiscription=0x7f08000f;
         public static final int dishImage=0x7f08000c;
@@ -53,7 +53,7 @@ public final class R {
         public static final int dishRating=0x7f080010;
         public static final int dishServes=0x7f08000e;
         public static final int homeHealthFacts=0x7f080002;
-        public static final int newestRecipes=0x7f080008;
+        public static final int newestRecipesB=0x7f080008;
         public static final int recipeButtonHolder=0x7f080006;
         public static final int recipesCatogoryTV=0x7f080009;
         public static final int tab1=0x7f080001;

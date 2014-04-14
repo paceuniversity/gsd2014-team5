@@ -72,14 +72,14 @@
                     android:orientation="horizontal" >
                     
                     <Button
-                    android:id="@+id/allRecipes"
+                    android:id="@+id/allRecipesB"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" 
                     android:background="@drawable/textlview_rounded_corners"
                     android:text="All"/>
                     
                     <Button
-                    android:id="@+id/newestRecipes"
+                    android:id="@+id/newestRecipesB"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" 
                     android:background="@drawable/textlview_rounded_corners"
