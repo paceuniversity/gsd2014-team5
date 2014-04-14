@@ -63,8 +63,41 @@
                     android:id="@+id/tab2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" 
+                    android:orientation="vertical" >
+                    
+                   <LinearLayout
+                    android:id="@+id/recipeButtonHolder"
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp" 
                     android:orientation="horizontal" >
                     
+                    <Button
+                    android:id="@+id/allRecipes"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content" 
+                    android:background="@drawable/textlview_rounded_corners"
+                    android:text="All"/>
+                    
+                    <Button
+                    android:id="@+id/newestRecipes"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content" 
+                    android:background="@drawable/textlview_rounded_corners"
+                    android:text="Newest"/>
+                
+                       </LinearLayout>
+                       
+                    <TextView android:id="@+id/recipesCatogoryTV"
+                   		android:layout_width="match_parent"
+                    	android:layout_height="20dp"
+                    	android:text="All"
+                    	android:gravity="center"/>
+                    
+                    <ListView
+       					android:id="@+id/allReecipesListView"
+        				android:layout_width="match_parent"
+        				android:layout_height="fill_parent">
+    				</ListView>
                    
                 </LinearLayout>
 

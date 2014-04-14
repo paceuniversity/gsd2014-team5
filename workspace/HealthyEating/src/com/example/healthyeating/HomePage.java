@@ -38,7 +38,7 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
 	//------Top 5 Recipes--------///
 	ListView top20ListView; // list view for top 10 recipes on home page
 	ImageListAdapter top20adabter;
-	ListView allRecipesListView;
+	ListView allReecipesListView;
 	//---------------------------///
 	private ArrayList<String> temp;
 	
@@ -48,7 +48,7 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         top20ListView = (ListView) findViewById(R.id.top20); // Initializes the list view
-        allRecipesListView = (ListView) findViewById(R.id.allReecipesListView);
+        allReecipesListView = (ListView) findViewById(R.id.allReecipesListView);
         //Class method to set up the tap host 
         setUpTabHost();
         
@@ -118,8 +118,10 @@ public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 @Override
 public void onTabChanged(String tabID) {
 	if(tabID.equals("tab2")){
-		Intent startRecipesAct = new Intent("com.example.healthyeating.RecipesMain");
-		startActivity(startRecipesAct);
+		allReecipesListView.setAdapter(top20adabter);
+		allReecipesListView.setOnItemClickListener(this);
+		//Intent startRecipesAct = new Intent("com.example.healthyeating.RecipesMain");
+		//startActivity(startRecipesAct);
 	}
 	
 }
