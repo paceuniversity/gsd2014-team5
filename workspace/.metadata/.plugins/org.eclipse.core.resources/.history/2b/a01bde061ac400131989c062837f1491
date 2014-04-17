@@ -63,44 +63,39 @@
                     android:id="@+id/tab2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" 
-                    android:layout_gravity="center_horizontal"
                     android:orientation="vertical" >
                     
                    <LinearLayout
                     android:id="@+id/recipeButtonHolder"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="200dp" 
-                    android:layout_marginRight="1dp"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal" >
                     
                     <Button
                     android:id="@+id/allRecipesB"
-                    android:layout_width="78dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content" 
-                    android:layout_marginRight="1dp"
                     android:background="@drawable/textlview_rounded_corners"
                     android:text="All"/>
                     
                     <Button
                     android:id="@+id/newestRecipesB"
-                    android:layout_width="78dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content" 
-                    android:layout_marginRight="1dp"
                     android:background="@drawable/textlview_rounded_corners"
                     android:text="Newest"/>
                     
                     <Button
                     android:id="@+id/topRatedRecipesB"
-                    android:layout_width="78dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content" 
-                    android:layout_marginRight="1dp"
                     android:background="@drawable/textlview_rounded_corners"
                     android:text="Top"/>
                     
                     <Button
                     android:id="@+id/favRecipesB"
-                    android:layout_width="78dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content" 
                     android:background="@drawable/textlview_rounded_corners"
                     android:text="Fav"/>

@@ -48,12 +48,9 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
 	Button allRecipesButton;
 	Button newestRecipes;
 	Button topRatedRecipes;
-	Button favRecipesButton;
 	ListView allReecipesListView;
 	ImageListAdapter allRecipes = null;
 	ImageListAdapter newestRecipesAdapter = null;
-	ImageListAdapter topRatedAdapter = null;
-	ImageListAdapter favRecipesAdapter = null;
 	//--------------------------//
 	
 	
@@ -66,7 +63,6 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
         setContentView(R.layout.home_page);
         top20ListView = (ListView) findViewById(R.id.top20); // Initializes the list view
         allReecipesListView = (ListView) findViewById(R.id.allReecipesListView);
-        
         //Class method to set up the tap host 
         setUpTabHost();
         
@@ -80,10 +76,6 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
         allRecipesButton.setOnClickListener(this);
         newestRecipes = (Button) findViewById(R.id.newestRecipesB);
         newestRecipes.setOnClickListener(this);
-        topRatedRecipes = (Button) findViewById(R.id.topRatedRecipesB);
-        topRatedRecipes.setOnClickListener(this);
-        favRecipesButton = (Button) findViewById(R.id.favRecipesB);
-        favRecipesButton.setOnClickListener(this);
     }
 
 
@@ -174,23 +166,8 @@ case R.id.newestRecipesB:
 		newestRecipesAdapter = PopulateListViews.populate(newestRecipesAdapter, getApplicationContext(), PopulateListViews.NEW_RECIPES);
 	}
 	allReecipesListView.setAdapter(newestRecipesAdapter);
-
 	break;
 	
-	
-case R.id.topRatedRecipesB:
-	if(topRatedAdapter==null){
-		topRatedAdapter = PopulateListViews.populate(topRatedAdapter, getApplicationContext(), PopulateListViews.TOP_RATED_RECIPES);
-	}
-	allReecipesListView.setAdapter(topRatedAdapter);
-	break;
-	
-case R.id.favRecipesB:
-	if(favRecipesAdapter==null){
-		favRecipesAdapter = PopulateListViews.populate(favRecipesAdapter, getApplicationContext(), PopulateListViews.FAV_RECIPES);
-	}
-	allReecipesListView.setAdapter(favRecipesAdapter);
-	break;
 default:
 	break;
 }

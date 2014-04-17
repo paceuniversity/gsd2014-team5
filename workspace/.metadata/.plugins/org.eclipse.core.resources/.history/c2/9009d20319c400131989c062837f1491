@@ -30,11 +30,7 @@ public abstract class PopulateListViews {
 			break;
 			
 		case 2:
-			dstAdabter = populateFavRecipes(dstAdabter, ctx);
-		break;
-		
-		case 3:
-			dstAdabter = populateTopRatedRecipes(dstAdabter, ctx);
+	
 		break;
 		default:
 			break;
@@ -81,49 +77,4 @@ public static ImageListAdapter populateNewestRecipes(ImageListAdapter adapter, C
 		return adapter;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-static ImageListAdapter populateTopRatedRecipes(ImageListAdapter adapter, Context act){
-		
-		ArrayList<String> dishName = new ArrayList<String>();
-		ArrayList<String> dishServes = new ArrayList<String>();
-		ArrayList<String> dishDescription = new ArrayList<String>();
-		dishName.add("Top");
-		dishName.add("Top");
-		dishServes.add("Top");
-		dishServes.add("Top");
-		dishDescription.add("Top");
-		dishDescription.add("Top");
-		
-		adapter = new ImageListAdapter(act, R.layout.image_list_item, dishName, dishDescription, dishServes);
-		
-		return adapter;
-	}
-
-
-
-
-
-
-static ImageListAdapter populateFavRecipes(ImageListAdapter adapter, Context act){
-	
-	ArrayList<String> dishName = new ArrayList<String>();
-	ArrayList<String> dishServes = new ArrayList<String>();
-	ArrayList<String> dishDescription = new ArrayList<String>();
-	dishName.add("Fav");
-	dishName.add("Fav");
-	dishServes.add("Fav");
-	dishServes.add("Fav");
-	dishDescription.add("Fav");
-	dishDescription.add("Fav");
-	
-	adapter = new ImageListAdapter(act, R.layout.image_list_item, dishName, dishDescription, dishServes);
-	
-	return adapter;
-}
 }
