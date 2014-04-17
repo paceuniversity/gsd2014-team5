@@ -121,59 +121,12 @@
                    
                 </LinearLayout>
 
-                <!-- BEGGINING OF HEALTH FACTS LAYOUT -->
                 <LinearLayout
                     android:id="@+id/tab3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" 
-                    android:orientation="vertical" > <!-- THIS IS THE ORIENTATION INFORMATION THAT NEEDS TO BE ADDED TO A TABHOST LAYOUT BY THE WAY -->
-                    
-                    
-                    <!-- This test view is  -->
-                    <TextView
-                    android:id="@+id/demoView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" 
-                    android:text="See any items placed inside the tab3 linear layout will be displayed here"/>
-                    
-                    
-                    
-                    <!-- 
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    
-                    
-                    
-                    
-                    
-                    
-                    GREG THIS IS THE LAYOUT WHERE ALL OF YOUR HEALTH FACT DESIGN SHOULD GO. 
-                    WHENE THE USER CLICKS ON THE HEALTH FACTS TAB THIS IS WHAT WILL BE DISPLAY. 
-                    
-                    
-                    
-                    
-                    
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                     -->
-
+                    android:orientation="vertical" >
                 </LinearLayout>
-                <!-- END OF HEALTH FACTS LAYOUT -->
-                
             </FrameLayout>
         </LinearLayout>
     </TabHost>
