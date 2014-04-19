@@ -4,7 +4,7 @@
     android:layout_height="fill_parent" >
 
     <ImageView
-        android:id="@+id/MainImage"
+        android:id="@+id/Map_Zanzibar"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentLeft="true"
@@ -15,8 +15,8 @@
         android:id="@+id/CookingTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_toRightOf="@+id/MainImage"
+        android:layout_below="@+id/Intro"
+        android:layout_toRightOf="@+id/Map_Zanzibar"
         android:text="Cooking Time: "
         android:textStyle="bold" />
 
@@ -26,12 +26,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="15dp"
-        android:layout_toRightOf="@+id/MainImage"
+        android:layout_toRightOf="@+id/Map_Zanzibar"
         android:text="Recipe Name: "
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/Intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/CookingTime"
@@ -131,7 +131,7 @@
         android:id="@+id/Description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MainImage"
+        android:layout_below="@+id/Map_Zanzibar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp"
         android:text="Description"
@@ -141,15 +141,15 @@
         android:id="@+id/ImageView04"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/MainImage"
-        android:layout_below="@+id/MainImage"
+        android:layout_alignRight="@+id/Map_Zanzibar"
+        android:layout_below="@+id/Map_Zanzibar"
         android:src="@drawable/ic_launcher" />
 
     <ImageView
         android:id="@+id/ImageView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView2"
+        android:layout_alignRight="@+id/Intro"
         android:layout_alignTop="@+id/ImageView04"
         android:src="@drawable/ic_launcher" />
 
@@ -165,7 +165,7 @@
         android:id="@+id/ImageView02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MainImage"
+        android:layout_below="@+id/Map_Zanzibar"
         android:layout_toRightOf="@+id/ImageView01"
         android:src="@drawable/ic_launcher" />
 

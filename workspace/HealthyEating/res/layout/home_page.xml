@@ -138,38 +138,137 @@
                     
                     
                     
-                    <!-- 
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    
-                    
-                    
-                    
-                    
-                    
-                    GREG THIS IS THE LAYOUT WHERE ALL OF YOUR HEALTH FACT DESIGN SHOULD GO. 
-                    WHENE THE USER CLICKS ON THE HEALTH FACTS TAB THIS IS WHAT WILL BE DISPLAY. 
-                    
-                    
-                    
-                    
-                    
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                     -->
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/Heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/Main"
+        android:text="Health-related facts"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/Heading"
+        android:text="(brief summary of what this page will offer)" />
+
+    <ImageView
+        android:id="@+id/Main"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/Population"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/Intro"
+        android:layout_marginTop="16dp"
+        android:text="Population"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/Population_Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/Population" />
+
+    <TextView
+        android:id="@+id/HealthCare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/Population_Info"
+        android:text="Health Care"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/HC_Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/HealthCare" />
+
+    <TextView
+        android:id="@+id/CookingTips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/HC_Info"
+        android:text="Cooking Tips"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/CT_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/CookingTips" />
+
+    <TextView
+        android:id="@+id/MaternalTips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/CT_info"
+        android:text="Maternal Tips"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/MT_Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/MaternalTips" />
+
+    <ImageView
+        android:id="@+id/Map_Zanzibar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Population"
+        android:src="@drawable/ic_launcher" />
+
+    <Button
+        android:id="@+id/button2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="No" />
+
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/button2"
+        android:text="Yes" />
+
+    <TextView
+        android:id="@+id/Optional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_toLeftOf="@+id/button1"
+        android:text="Did you find this useful?" />
+
+</RelativeLayout>
 
                 </LinearLayout>
                 <!-- END OF HEALTH FACTS LAYOUT -->
