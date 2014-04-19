@@ -6,12 +6,9 @@
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.widget.ImageView"/>
 <fullyQualifiedTypeName name="android.R.id"/>
-<fullyQualifiedTypeName name="com.example.healthyeating.R.id"/>
 <fullyQualifiedTypeName name="com.example.healthyeating.R.drawable"/>
 <fullyQualifiedTypeName name="android.widget.ListView"/>
-<fullyQualifiedTypeName name="com.example.healthyeating.ListViewAdapters.ImageListAdapter"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="android.widget.TabHost"/>
 <fullyQualifiedTypeName name="android.widget.TabHost.TabSpec"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
@@ -19,4 +16,15 @@
 <fullyQualifiedTypeName name="org.json.JSONObject"/>
 <fullyQualifiedTypeName name="com.example.healthyeating.data.JsonInfoLib"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.widget.Adapter"/>
+<fullyQualifiedTypeName name="android.app.Activity"/>
+<fullyQualifiedTypeName name="ArrayLista_Population"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="android.content.DialogInterface.OnClickListener"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="com.example.healthyeating.ListViewAdapters.ImageListAdapter"/>
+<fullyQualifiedTypeName name="com.example.healthyeating.R.id"/>
+<fullyQualifiedTypeName name="ListViewPopulate.PopulateListViews"/>
 </qualifiedTypeNameHistroy>

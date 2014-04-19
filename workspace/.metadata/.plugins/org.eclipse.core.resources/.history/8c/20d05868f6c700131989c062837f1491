@@ -126,26 +126,10 @@
                     android:id="@+id/tab3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" 
-                    android:orientation="vertical" > <!-- THIS IS THE ORIENTATION INFORMATION THAT WE TALKED ABOUT EARLY THAT NEEDS TO BE ADDED TO A TABHOST LAYOUT BY THE WAY -->
-                            
-                    <!-- 
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-                    *************************
-      
-           
-                    GREG THIS IS THE LAYOUT WHERE ALL OF YOUR HEALTH FACT DESIGN SHOULD GO. 
-                    WHENE THE USER CLICKS ON THE HEALTH FACTS TAB THIS IS WHAT WILL BE DISPLAY. 
+                    android:orientation="vertical" > <!-- THIS IS THE ORIENTATION INFORMATION THAT NEEDS TO BE ADDED TO A TABHOST LAYOUT BY THE WAY -->
                     
                     
-                    This text view is a demo to show you that if you click on the healthy eating tab 
-                    on the home page it will display this text view 
-                    -->
-      
+                    <!-- This test view is  -->
                     <TextView
                     android:id="@+id/demoView"
                     android:layout_width="match_parent"
@@ -154,7 +138,27 @@
                     
                     
                     
-                   <!-- 
+                    <!-- 
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    
+                    
+                    
+                    
+                    
+                    
+                    GREG THIS IS THE LAYOUT WHERE ALL OF YOUR HEALTH FACT DESIGN SHOULD GO. 
+                    WHENE THE USER CLICKS ON THE HEALTH FACTS TAB THIS IS WHAT WILL BE DISPLAY. 
+                    
+                    
+                    
+                    
+                    
                     *************************
                     *************************
                     *************************
