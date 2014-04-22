@@ -135,6 +135,9 @@
                     android:text="See any items placed inside the tab3 linear layout will be displayed here"/>
                     
                     
+                    
+<<<<<<< HEAD
+  
 <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >

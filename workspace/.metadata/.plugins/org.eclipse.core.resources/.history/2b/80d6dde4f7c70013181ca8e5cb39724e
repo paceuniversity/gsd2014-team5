@@ -122,12 +122,37 @@
                 </LinearLayout>
 
                 <!-- BEGGINING OF HEALTH FACTS LAYOUT -->
-                 <LinearLayout
+                <LinearLayout
                     android:id="@+id/tab3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" 
+<<<<<<< HEAD
                     android:orientation="vertical" > <!-- THIS IS THE ORIENTATION INFORMATION THAT WE TALKED ABOUT EARLY THAT NEEDS TO BE ADDED TO A TABHOST LAYOUT BY THE WAY -->
-         
+                            
+                    <!-- 
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+      
+           
+                    GREG THIS IS THE LAYOUT WHERE ALL OF YOUR HEALTH FACT DESIGN SHOULD GO. 
+                    WHENE THE USER CLICKS ON THE HEALTH FACTS TAB THIS IS WHAT WILL BE DISPLAY. 
+                    
+                    
+                    This text view is a demo to show you that if you click on the healthy eating tab 
+                    on the home page it will display this text view 
+                    -->
+      
+=======
+                    android:orientation="vertical" > <!-- THIS IS THE ORIENTATION INFORMATION THAT NEEDS TO BE ADDED TO A TABHOST LAYOUT BY THE WAY -->
+                    
+                    
+                    <!-- This test view is  -->
+>>>>>>> 1d583a4445cfcd50df6cbe5b387df7036dcfb4ea
                     <TextView
                     android:id="@+id/demoView"
                     android:layout_width="match_parent"
@@ -135,6 +160,22 @@
                     android:text="See any items placed inside the tab3 linear layout will be displayed here"/>
                     
                     
+                    
+<<<<<<< HEAD
+                   <!-- 
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                    *************************
+                     -->
+=======
+
 <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
