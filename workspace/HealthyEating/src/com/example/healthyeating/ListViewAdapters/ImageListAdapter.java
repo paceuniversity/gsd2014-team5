@@ -35,7 +35,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Bitmap.Config;
 import android.net.LocalSocketAddress.Namespace;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +58,7 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 	private ArrayList<String> dishNames;
 	private ArrayList<String> dishDescription;
 	private ArrayList<String> dishServes;
+	private ArrayList<String> dishURLs;
 	private ArrayList<Bitmap> dishImages;
 	private TypedArray mIcons;
 	private ArrayList<Bitmap> albumArt;
@@ -59,7 +67,7 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 	
 
 	public ImageListAdapter(Context ctx, int viewResourceId,
-			ArrayList<String> _dishNames, ArrayList<String> _dishDescription, ArrayList<String> _dishServes) {
+			ArrayList<String> _dishNames, ArrayList<String> _dishDescription, ArrayList<String> _dishServes, ArrayList<String> _dishURLS) {
 		super(ctx, viewResourceId, _dishNames);
 		
 		mInflater = (LayoutInflater)ctx.getSystemService(
@@ -68,6 +76,7 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 		dishNames = _dishNames;
 		dishDescription = _dishDescription;
 		dishServes = _dishServes;
+		dishURLs = _dishURLS;
 		dishImages = new ArrayList<Bitmap>();
 		mViewResourceId = viewResourceId;
 		albumTitlePosition = new HashMap<String, Integer>();
@@ -107,10 +116,19 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 			dishImage.setImageBitmap(dishImages.get(position));
 		}
 		else{
-		ImageLoaderTask imageLoader = new ImageLoaderTask(dishImage);
-		imageLoader.execute("http://turbotri.com/gsd2014team5/images/ic_launcher.png");
+			ImageLoaderTask imageLoader = new ImageLoaderTask(dishImage);
+			if(dishURLs.get(position)!=null){
+			imageLoader.execute(dishURLs.get(position));				
+			}else{
+			imageLoader.execute("http://turbotri.com/gsd2014team5/images/ic_launcher.png");
+			}
 		try {
-			dishImages.add(position, imageLoader.get());
+			Bitmap temp = imageLoader.get();
+			 if(temp!=null){
+			      temp = temp.createScaledBitmap(temp, 100, 95, true);
+			      temp = roundCorner(temp, 5f);
+			 }
+			dishImages.add(position, temp);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -138,4 +156,37 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 		discription.setText(dishDescription.get(position));
 		return convertView;
 	}
+	
+	
+	 @SuppressWarnings("deprecation")
+		public static Bitmap roundCorner(Bitmap src, float round) {
+			    // image size
+			    int width = src.getWidth();
+			    int height = src.getHeight();
+			    // create bitmap output
+			    Bitmap result = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+			    // set canvas for painting
+			    Canvas canvas = new Canvas(result);
+			    canvas.drawARGB(0, 0, 0, 0);
+			 
+			    // config paint
+			    final Paint paint = new Paint();
+			    paint.setAntiAlias(true);
+			    paint.setColor(Color.BLACK);
+			 
+			    // config rectangle for embedding
+			    final Rect rect = new Rect(0, 0, width, height);
+			    final RectF rectF = new RectF(rect);
+			 
+			    // draw rect to canvas
+			    canvas.drawRoundRect(rectF, round, round, paint);
+			 
+			    // create Xfer mode
+			    paint.setXfermode(new PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC_IN));
+			    // draw source image to canvas
+			    canvas.drawBitmap(src, rect, rect, paint);
+			 
+			    // return final image
+			    return result;
+			}
 }

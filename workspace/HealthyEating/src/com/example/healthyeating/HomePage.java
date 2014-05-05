@@ -16,6 +16,7 @@ import org.json.JSONException;
 import com.example.healthyeating.ListViewAdapters.ImageListAdapter;
 import com.example.healthyeating.data.JSONLib;
 import com.example.healthyeating.data.JsonParser;
+import com.example.healthyeating.data.RecipeTempHolder;
 import com.example.healthyeating.data.RetriveData;
 
 import ListViewPopulate.PopulateListViews;
@@ -30,18 +31,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 
 public class HomePage extends Activity implements OnItemClickListener, OnTabChangeListener, android.view.View.OnClickListener{
 	
 	//------Top 5 Recipes--------///
 	ListView top20ListView; // list view for top 10 recipes on home page
-	ImageListAdapter top20adabter;
-	
-	
+	public ImageListAdapter top20adabter;
+	public JSONLib Recipes_Libary;
+	public ImageView HealthFactsTV;
 	//---------------------------///
 	
 	//-----Recipes Tap-----------//
@@ -50,6 +53,7 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
 	Button topRatedRecipes;
 	Button favRecipesButton;
 	ListView allReecipesListView;
+	TextView listViewTitleTextView;
 	ImageListAdapter allRecipes = null;
 	ImageListAdapter newestRecipesAdapter = null;
 	ImageListAdapter topRatedAdapter = null;
@@ -64,6 +68,9 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
+        Recipes_Libary = new JSONLib();
+        
+        HealthFactsTV = (ImageView) findViewById(R.id.homeHealthFactsImageView);
         top20ListView = (ListView) findViewById(R.id.top20); // Initializes the list view
         allReecipesListView = (ListView) findViewById(R.id.allReecipesListView);
         
@@ -74,7 +81,6 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
        // getData.sendActInfo();
         getData.execute();
   
-        
         //-------Recipes Tap------------------//
         allRecipesButton = (Button) findViewById(R.id.allRecipesB);
         allRecipesButton.setOnClickListener(this);
@@ -84,6 +90,7 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
         topRatedRecipes.setOnClickListener(this);
         favRecipesButton = (Button) findViewById(R.id.favRecipesB);
         favRecipesButton.setOnClickListener(this);
+        listViewTitleTextView = (TextView) findViewById(R.id.recipesCatogoryTV);
     }
 
 
@@ -96,9 +103,9 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
     
     
     //Handles all the work reguired in order to populate the list view
-    public void populateTop20ListView(ArrayList<String> dishName, ArrayList<String> dishDescription, ArrayList<String> dishServes){
+    public void populateTop20ListView(ArrayList<String> dishName, ArrayList<String> dishDescription, ArrayList<String> dishServes, ArrayList<String> dishURLS){
     	
-		top20adabter = new ImageListAdapter(getApplicationContext(), R.layout.image_list_item, dishName, dishDescription, dishServes);
+		top20adabter = new ImageListAdapter(getApplicationContext(), R.layout.image_list_item, dishName, dishDescription, dishServes, dishURLS);
 		top20ListView.setAdapter(top20adabter); //Populates the list view one the home page with the top 5 recipes
 		top20ListView.setOnItemClickListener(this);
     }
@@ -136,6 +143,10 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
 
 @Override
 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+	RecipeTempHolder.setClilckedItem(Recipes_Libary.getRecipe(Integer.toString((arg2+1))));
+	
+	//Log.e(Recipes_Libary.getRecipe("0").getDishID(), Recipes_Libary.getRecipe("0").toString());
+
 	Intent RecipeFullView = new Intent("com.example.healthyeating.RecipeFullView");
 	startActivity(RecipeFullView);
 	
@@ -149,7 +160,7 @@ public void onTabChanged(String tabID) {
 		if(allRecipes==null){
 			allRecipes = PopulateListViews.populate(allRecipes, getApplicationContext(), PopulateListViews.ALL_RECIPES);
 		}
-		
+		allRecipes = top20adabter;
 		allReecipesListView.setAdapter(allRecipes);
 		allReecipesListView.setOnItemClickListener(this);
 	}
@@ -163,31 +174,34 @@ public void onClick(View v) {
 switch (v.getId()) {
 case R.id.allRecipesB:
 	if(allRecipes==null){
-		allRecipes = PopulateListViews.populate(allRecipes, getApplicationContext(), PopulateListViews.ALL_RECIPES);
+		allRecipes = top20adabter; //PopulateListViews.populate(allRecipes, getApplicationContext(), PopulateListViews.ALL_RECIPES);
 	}
-	
+	listViewTitleTextView.setText("All Recipes");
 	allReecipesListView.setAdapter(allRecipes);
 	break;
 
 case R.id.newestRecipesB:
 	if(newestRecipesAdapter==null){
-		newestRecipesAdapter = PopulateListViews.populate(newestRecipesAdapter, getApplicationContext(), PopulateListViews.NEW_RECIPES);
+		newestRecipesAdapter = top20adabter; //newestRecipesAdapter = PopulateListViews.populate(newestRecipesAdapter, getApplicationContext(), PopulateListViews.NEW_RECIPES);
 	}
+	listViewTitleTextView.setText("Newest");
 	allReecipesListView.setAdapter(newestRecipesAdapter);
 	break;
 	
 	
 case R.id.topRatedRecipesB:
 	if(topRatedAdapter==null){
-		topRatedAdapter = PopulateListViews.populate(topRatedAdapter, getApplicationContext(), PopulateListViews.TOP_RATED_RECIPES);
+		topRatedAdapter = top20adabter; //topRatedAdapter = PopulateListViews.populate(topRatedAdapter, getApplicationContext(), PopulateListViews.TOP_RATED_RECIPES);
 	}
+	listViewTitleTextView.setText("Top Rated");
 	allReecipesListView.setAdapter(topRatedAdapter);
 	break;
 	
 case R.id.favRecipesB:
 	if(favRecipesAdapter==null){
-		favRecipesAdapter = PopulateListViews.populate(favRecipesAdapter, getApplicationContext(), PopulateListViews.FAV_RECIPES);
+		favRecipesAdapter = top20adabter; //favRecipesAdapter = PopulateListViews.populate(favRecipesAdapter, getApplicationContext(), PopulateListViews.FAV_RECIPES);
 	}
+	listViewTitleTextView.setText("Favorites");
 	allReecipesListView.setAdapter(favRecipesAdapter);
 	break;
 default:

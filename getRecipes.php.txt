@@ -1,0 +1,40 @@
+
+<?php   
+
+$connect = mysql_connect("205.178.146.104", "goodwinj14", "Bulldog14");
+?> 
+
+<?php   
+$database = mysql_select_db("appcontent", $connect);
+?>
+
+
+<?php   
+$equals = mysql_query("SELECT * FROM top_5", $connect) or die("Could not Connect");
+?>
+
+
+<?php   
+
+$json_data = array('Top5' =>array());
+
+while( $column = mysql_fetch_array($equals)){
+//$json_top5_item = array('id' => $column[0]);
+$json_top5_item = array('id' => $column[0],'Intro' => $column[1],'Population_Info' => $column[2],'HC_Info' => $column[3],'CT_info' => $column[4],'MT_Info' => $column[5]);     
+ array_push($json_data["Top5"], $json_top5_item);
+}
+
+echo json_encode($json_data);    
+?>
+
+         
+
+
+
+
+
+<?php     
+mysql_close($connect);
+?>
+
+         

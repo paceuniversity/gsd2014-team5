@@ -1,0 +1,21 @@
+package com.example.healthyeating;
+
+import com.example.healthyeating.data.RecipeItem;
+import com.example.healthyeating.data.RecipeTempHolder;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class RecipeFullView extends Activity {
+	TextView DishName;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		setContentView(R.layout.recipe);
+		super.onCreate(savedInstanceState);
+		//RecipeItem temp = RecipeTempHolder.getClickedItem();
+		DishName = (TextView) findViewById(R.id.dishName);
+		//DishName.setText(temp.getDishName());
+		
+	}
+}

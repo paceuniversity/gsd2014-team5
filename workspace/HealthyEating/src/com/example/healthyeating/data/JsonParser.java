@@ -12,11 +12,11 @@ import android.util.Log;
 public class JsonParser {
 
 	static JSONObject mainObject = null;
+	JSONLib Libary;
 	
-	public JsonParser(JSONObject _object) throws JSONException{
+	public JsonParser(JSONObject _object, JSONLib lib) throws JSONException{
 		mainObject = _object;
-		System.out.println( "Json Parser " + getTop5().toString());
-		
+		Libary = lib;		
 	}
 	
 	public String getAllOfValue__(String value){
@@ -32,8 +32,11 @@ public class JsonParser {
 		ArrayList<String> DishDescrip = new ArrayList<String>();
 		ArrayList<String> DishRating = new ArrayList<String>();
 		ArrayList<String> DishServes = new ArrayList<String>();
+		ArrayList<String> DishImageURL = new ArrayList<String>();
+		ArrayList<String> index = new ArrayList<String>();
+		ArrayList<RecipeItem> recipes = new ArrayList<RecipeItem>();
 		JSONArray  top5 = mainObject.getJSONArray("Top5");
-		
+		Log.d("top5 length", Integer.toString(top5.length()));
 		for(int i =0; i<top5.length(); i++){
 			JSONObject dishObj = top5.getJSONObject(i);
 			//JSONObject getIndividualVideoData = dishObj.getJSONObject("DishName");
@@ -41,11 +44,21 @@ public class JsonParser {
 			DishDescrip.add(dishObj.get("DishDescription").toString());
 			DishRating.add(dishObj.get("DishRating").toString());
 			DishServes.add(dishObj.get("DishServes").toString());
-		}
+			DishImageURL.add(dishObj.get("DishImage").toString());
+			/*recipes.add(new RecipeItem(dishObj.get("id").toString(), dishObj.get("DishName").toString(), dishObj.get("DishDescription").toString(), dishObj.get("DishRating").toString(),
+					dishObj.get("DishServes").toString(), dishObj.get("DishURL").toString(), dishObj.get("DishCookTime").toString(), dishObj.get("DishFullDiscription").toString(),
+					dishObj.get("DishIngredients").toString(), dishObj.get("DishSteps").toString()));
+			index.add(dishObj.get("id").toString());*/
+			Libary.addRecipe(dishObj.get("ID").toString(), new RecipeItem(dishObj.get("ID").toString(), dishObj.get("DishName").toString(), dishObj.get("DishDescription").toString(), dishObj.get("DishRating").toString(),
+					dishObj.get("DishServes").toString(), dishObj.get("DishImage").toString(), dishObj.get("CookTime").toString(), dishObj.get("FullDiscription").toString(),
+					dishObj.get("Ingredients").toString(), dishObj.get("Steps").toString()));
+					}
+		
 		returnData.add(DishNames);
 		returnData.add(DishDescrip);
 		returnData.add(DishServes);
 		returnData.add(DishRating);
+		returnData.add(DishImageURL);
 		return  returnData;
 		}
 		else return null;

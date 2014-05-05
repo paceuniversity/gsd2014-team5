@@ -1,0 +1,40 @@
+package com.example.healthyeating.data;
+
+public class RecipeItem {
+	static String ID = null;
+	static String DISH_NAME = null;
+	static String DISH_DISCRIPTION = null;
+	static String DISH_RATING = null;
+	static String DISH_SERVES = null;
+	static String DISH_IMAGE = null;
+	static String DISH_COOK_TIME = null;
+	static String DISH_FULL_DISCRIPTION = null;
+	static String DISH_INGREDIENTS = null;
+	static String DISH_STEPS = null;
+	
+	public RecipeItem(String _ID, String _DISH_NAME, String _DISH_DISCRIPTION,
+			String _DISH_RATING, String _DISH_SERVES, String _DISH_IMAGE, String _DISH_COOK_TIME,
+			String _DISH_FULL_DISCRIPTION, String _DISH_INGREDIENTS, String _DISH_STEPS) {
+
+		ID = _ID;
+		DISH_NAME = _DISH_NAME;
+		DISH_DISCRIPTION = _DISH_DISCRIPTION;
+		DISH_RATING = _DISH_RATING;
+		DISH_SERVES = _DISH_SERVES;
+		DISH_IMAGE = _DISH_IMAGE;
+		DISH_COOK_TIME = _DISH_COOK_TIME;
+		DISH_FULL_DISCRIPTION = _DISH_FULL_DISCRIPTION;
+		DISH_INGREDIENTS = _DISH_INGREDIENTS;
+		DISH_STEPS = _DISH_STEPS;
+	}
+	
+	@Override
+	public String toString() {
+		String temp = ID + ", " + DISH_NAME + ", " + DISH_DISCRIPTION + ", " + DISH_SERVES + ", ";
+		temp = temp.concat(DISH_IMAGE + ", " + DISH_COOK_TIME + ", " + DISH_FULL_DISCRIPTION + ", " + DISH_INGREDIENTS + ", " + DISH_STEPS);
+		return temp;
+	}
+	public String  getDishName(){ 
+		return DISH_NAME;
+	}
+}

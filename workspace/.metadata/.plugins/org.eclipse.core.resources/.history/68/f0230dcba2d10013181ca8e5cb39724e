@@ -1,0 +1,26 @@
+package com.example.healthyeating.data;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.json.JSONObject;
+
+import android.util.Log;
+
+public class JSONLib {
+	HashMap<String, RecipeItem> Recipes;
+	
+	public JSONLib() {
+		Recipes = new HashMap<String, RecipeItem>();
+	}
+	
+	public void addRecipe(String ID, RecipeItem Recipe){
+		Recipes.put(ID, Recipe);
+		//Recipes.size();
+		Log.e("JSONlib", Recipes.keySet().toString());
+	}
+	public RecipeItem getRecipe(String ID){
+		return Recipes.get(ID);
+	}
+}
+

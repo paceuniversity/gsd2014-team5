@@ -1,0 +1,81 @@
+package com.example.healthyeating.data;
+
+import java.io.InputStream;
+
+import com.example.healthyeating.R;
+
+import android.graphics.AvoidXfermode.Mode;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.ImageView;
+
+public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap>{
+	ImageView recipeListViewImageView;
+	
+	  public ImageLoaderTask(ImageView input_recipeListViewImageView) {
+	      this.recipeListViewImageView = input_recipeListViewImageView;
+	  }
+
+	  protected Bitmap doInBackground(String... urls) {
+	      String urldisplay = urls[0];
+	      Bitmap thumbNail = null;
+	      try {
+	        InputStream in = new java.net.URL(urldisplay).openStream();
+	        thumbNail = BitmapFactory.decodeStream(in);
+	      } catch (Exception e) {
+	          Log.e("Error", e.getMessage());
+	          e.printStackTrace();
+	      }
+	      return thumbNail;
+	  }
+
+	  protected void onPostExecute(Bitmap result) {
+		  if(result!=null){
+	      result = result.createScaledBitmap(result, 100, 100, true);
+	      //result = roundCornered(result, 2);
+	      
+		  recipeListViewImageView.setImageBitmap(getRoundedShape(result));
+		  }else{
+		  recipeListViewImageView.setImageResource(R.drawable.ic_launcher);
+		  }		  
+	  }
+	  
+	  public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
+		  // TODO Auto-generated method stub
+		  int targetWidth = 50;
+		  int targetHeight = 50;
+		  Bitmap targetBitmap = Bitmap.createBitmap(targetWidth, 
+
+		                            targetHeight,Bitmap.Config.ARGB_8888);
+		  
+
+		                Canvas canvas = new Canvas(targetBitmap);
+		  Path path = new Path();
+		  path.addCircle(((float) targetWidth - 1) / 2,
+		  ((float) targetHeight - 1) / 2,
+		  (Math.min(((float) targetWidth), 
+		                ((float) targetHeight)) / 2),
+		          Path.Direction.CCW);
+		  
+
+		                canvas.clipPath(path);
+		  Bitmap sourceBitmap = scaleBitmapImage;
+		  canvas.drawBitmap(sourceBitmap, 
+		                                new Rect(0, 0, sourceBitmap.getWidth(),
+		    sourceBitmap.getHeight()), 
+		                                new Rect(0, 0, targetWidth,
+		    targetHeight), null);
+		  return targetBitmap;
+		 }
+
+
+	}

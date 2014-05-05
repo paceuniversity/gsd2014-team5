@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.healthyeating.HomePage;
+import com.example.healthyeating.R;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -26,9 +27,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class RetriveData extends AsyncTask<Void, Void, Void> {
-	JsonParser Top5;
+	JsonParser Top5 = null;
+	JSONObject temp = null;
 	private Context context;
 	private HomePage activity;
 	ProgressDialog dialog;
@@ -55,9 +58,17 @@ public class RetriveData extends AsyncTask<Void, Void, Void> {
 	}
 	@Override
 	protected Void doInBackground(Void... params) {
+		temp = getJSONObject("http://turbotri.com/gsd2014team5/getHealthFacts.php");
+		Log.d("HealthFacts", temp.toString());
+		
 		try {
-			Top5 = new JsonParser(getJSONObject("http://turbotri.com/gsd2014team5/getContent.php"));
-		} catch (JSONException e) {
+			if(Top5==null){
+			Top5 = new JsonParser(getJSONObject("http://turbotri.com/gsd2014team5/getContent.php"), activity.Recipes_Libary);
+			}
+			else{
+				Top5 = Top5;
+			}
+			} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -67,11 +78,12 @@ public class RetriveData extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 		dialog.dismiss();
-		
+		ImageLoaderTask imageLoader = new ImageLoaderTask(activity.HealthFactsTV);
+		imageLoader.execute("http://turbotri.com/gsd2014team5/images/chapati.jpg");
+
 		try {
 			ArrayList<ArrayList<String>> t = Top5.getTop5();
-			activity.populateTop20ListView(t.get(0), t.get(1), t.get(2));
-			Log.e("onPost", Top5.getTop5().toString());
+			activity.populateTop20ListView(t.get(0), t.get(1), t.get(2), t.get(4));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,0 +1,227 @@
+package com.example.healthyeating;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+
+import com.example.healthyeating.ListViewAdapters.ImageListAdapter;
+import com.example.healthyeating.data.JSONLib;
+import com.example.healthyeating.data.JsonParser;
+import com.example.healthyeating.data.RecipeTempHolder;
+import com.example.healthyeating.data.RetriveData;
+
+import ListViewPopulate.PopulateListViews;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
+import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
+
+public class HomePage extends Activity implements OnItemClickListener, OnTabChangeListener, android.view.View.OnClickListener{
+	
+	//------Top 5 Recipes--------///
+	ListView top20ListView; // list view for top 10 recipes on home page
+	public ImageListAdapter top20adabter;
+	public JSONLib Recipes_Libary;
+	public ImageView HealthFactsTV;
+	//---------------------------///
+	
+	//-----Recipes Tap-----------//
+	Button allRecipesButton;
+	Button newestRecipes;
+	Button topRatedRecipes;
+	Button favRecipesButton;
+	ListView allReecipesListView;
+	TextView listViewTitleTextView;
+	ImageListAdapter allRecipes = null;
+	ImageListAdapter newestRecipesAdapter = null;
+	ImageListAdapter topRatedAdapter = null;
+	ImageListAdapter favRecipesAdapter = null;
+	//--------------------------//
+	
+	
+	private ArrayList<String> temp;
+	
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.home_page);
+        Recipes_Libary = new JSONLib();
+        
+        HealthFactsTV = (ImageView) findViewById(R.id.homeHealthFactsTextView);
+        top20ListView = (ListView) findViewById(R.id.top20); // Initializes the list view
+        allReecipesListView = (ListView) findViewById(R.id.allReecipesListView);
+        
+        //Class method to set up the tap host 
+        setUpTabHost();
+        
+        RetriveData getData = new RetriveData(this);
+       // getData.sendActInfo();
+        getData.execute();
+  
+        //-------Recipes Tap------------------//
+        allRecipesButton = (Button) findViewById(R.id.allRecipesB);
+        allRecipesButton.setOnClickListener(this);
+        newestRecipes = (Button) findViewById(R.id.newestRecipesB);
+        newestRecipes.setOnClickListener(this);
+        topRatedRecipes = (Button) findViewById(R.id.topRatedRecipesB);
+        topRatedRecipes.setOnClickListener(this);
+        favRecipesButton = (Button) findViewById(R.id.favRecipesB);
+        favRecipesButton.setOnClickListener(this);
+        listViewTitleTextView = (TextView) findViewById(R.id.recipesCatogoryTV);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    
+    
+    //Handles all the work reguired in order to populate the list view
+    public void populateTop20ListView(ArrayList<String> dishName, ArrayList<String> dishDescription, ArrayList<String> dishServes, ArrayList<String> dishURLS){
+    	
+		top20adabter = new ImageListAdapter(getApplicationContext(), R.layout.image_list_item, dishName, dishDescription, dishServes, dishURLS);
+		top20ListView.setAdapter(top20adabter); //Populates the list view one the home page with the top 5 recipes
+		top20ListView.setOnItemClickListener(this);
+    }
+    
+    
+  //Sets up the tab host that will hold all of the taps to navigate to other parts of the app
+  	public void setUpTabHost(){
+  		//_________Initializes and sets up Tap Host_________//
+  		
+  				TabHost th = (TabHost) findViewById(R.id.tabhost);
+  			    th.setup();
+  			    th.setOnTabChangedListener(this);
+  			    
+  			    //---Adds Home Tab to TabHost---//
+  			    TabSpec specs = th.newTabSpec("tab1");
+  			    specs.setContent(R.id.tab1);
+  			    specs.setIndicator("Home");
+  			    th.addTab(specs);
+  			    
+  			    //---Adds Recipes Tab to TabHost---//
+  			    specs = th.newTabSpec("tab2");
+  			    specs.setContent(R.id.tab2);
+  			    specs.setIndicator("Recipes");
+  			    th.addTab(specs);
+  			    
+  			    //---Adds Favortits Tab to TabHost---//	    
+  			    specs = th.newTabSpec("tab3");
+  			    specs.setContent(R.id.tab3);
+  			    specs.setIndicator("Health Facts");
+  			    th.addTab(specs);
+  			    
+  		//_____________________________________________________//
+  	}
+
+
+@Override
+public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+	RecipeTempHolder.setClilckedItem(Recipes_Libary.getRecipe(Integer.toString((arg2+1))));
+	
+	//Log.e(Recipes_Libary.getRecipe("0").getDishID(), Recipes_Libary.getRecipe("0").toString());
+
+	Intent RecipeFullView = new Intent("com.example.healthyeating.RecipeFullView");
+	startActivity(RecipeFullView);
+	
+}
+
+
+@Override
+public void onTabChanged(String tabID) {
+	if(tabID.equals("tab2")){
+		
+		if(allRecipes==null){
+			allRecipes = PopulateListViews.populate(allRecipes, getApplicationContext(), PopulateListViews.ALL_RECIPES);
+		}
+		allRecipes = top20adabter;
+		allReecipesListView.setAdapter(allRecipes);
+		allReecipesListView.setOnItemClickListener(this);
+	}
+	
+}
+
+
+@Override
+public void onClick(View v) {
+
+switch (v.getId()) {
+case R.id.allRecipesB:
+	if(allRecipes==null){
+		allRecipes = top20adabter; //PopulateListViews.populate(allRecipes, getApplicationContext(), PopulateListViews.ALL_RECIPES);
+	}
+	listViewTitleTextView.setText("All Recipes");
+	allReecipesListView.setAdapter(allRecipes);
+	break;
+
+case R.id.newestRecipesB:
+	if(newestRecipesAdapter==null){
+		newestRecipesAdapter = top20adabter; //newestRecipesAdapter = PopulateListViews.populate(newestRecipesAdapter, getApplicationContext(), PopulateListViews.NEW_RECIPES);
+	}
+	listViewTitleTextView.setText("Newest");
+	allReecipesListView.setAdapter(newestRecipesAdapter);
+	break;
+	
+	
+case R.id.topRatedRecipesB:
+	if(topRatedAdapter==null){
+		topRatedAdapter = top20adabter; //topRatedAdapter = PopulateListViews.populate(topRatedAdapter, getApplicationContext(), PopulateListViews.TOP_RATED_RECIPES);
+	}
+	listViewTitleTextView.setText("Top Rated");
+	allReecipesListView.setAdapter(topRatedAdapter);
+	break;
+	
+case R.id.favRecipesB:
+	if(favRecipesAdapter==null){
+		favRecipesAdapter = top20adabter; //favRecipesAdapter = PopulateListViews.populate(favRecipesAdapter, getApplicationContext(), PopulateListViews.FAV_RECIPES);
+	}
+	listViewTitleTextView.setText("Favorites");
+	allReecipesListView.setAdapter(favRecipesAdapter);
+	break;
+default:
+	break;
+}
+	
+}
+
+
+
+
+
+    
+  	
+  	
+  
+  	
+	
+  	
+  	
+  	
+  	
+}

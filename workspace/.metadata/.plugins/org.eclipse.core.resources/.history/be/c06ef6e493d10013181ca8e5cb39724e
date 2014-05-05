@@ -1,0 +1,36 @@
+package com.example.healthyeating;
+
+import com.example.healthyeating.data.ImageLoaderTask;
+import com.example.healthyeating.data.RecipeItem;
+import com.example.healthyeating.data.RecipeTempHolder;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class RecipeFullView extends Activity {
+	TextView DishName;
+	TextView Aurthor;
+	TextView CookTime;
+	TextView ServingSize;
+	ImageView MainImage;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		setContentView(R.layout.recipe);
+		super.onCreate(savedInstanceState);
+		RecipeItem temp = RecipeTempHolder.getClickedItem();
+		DishName = (TextView) findViewById(R.id.RecipeName);
+		Aurthor = (TextView) findViewById(R.id.AuthorContent);
+		CookTime = (TextView) findViewById(R.id.CookingTime);
+		ServingSize = (TextView) findViewById(R.id.ServingContent);
+		MainImage = (ImageView) findViewById(R.id.Map_Zanzibar);
+		
+		ImageLoaderTask load = new ImageLoaderTask(MainImage);
+		load.execute(temp.getDishImage());
+		DishName.setText(temp.getDishName());
+		CookTime.setText(temp.getDishCookTime());
+		ServingSize.setText(temp.getDishServes());
+	}
+}

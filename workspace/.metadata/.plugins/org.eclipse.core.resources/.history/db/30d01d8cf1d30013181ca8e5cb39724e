@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+    <ImageView
+        android:id="@+id/Map_Zanzibar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/CookingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Intro"
+        android:layout_toRightOf="@+id/Map_Zanzibar"
+        android:text="Cooking Time: "
+        android:textStyle="bold" />
+    
+     <TextView
+        android:id="@+id/TimeContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/CookingTime"
+        android:layout_alignBottom="@+id/CookingTime"
+        android:layout_toRightOf="@+id/CookingTime" 
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/RecipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/Map_Zanzibar"
+        android:text="Recipe Name: "
+        android:textStyle="bold" />
+    
+     <TextView
+        android:id="@+id/NameContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/RecipeName"
+        android:layout_alignBottom="@+id/RecipeName"
+        android:layout_toRightOf="@+id/RecipeName" 
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/Intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CookingTime"
+        android:layout_below="@+id/RecipeName"
+        android:text="Author: "
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/AuthorContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ImageView02"
+        android:layout_below="@+id/NameContent" 
+        android:text=""/>
+
+ <TextView
+        android:id="@+id/ServingSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CookingTime"
+        android:layout_below="@+id/CookingTime"
+        android:text="Serving Size: "
+        android:textStyle="bold" />   
+
+    <TextView
+        android:id="@+id/ServingContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" 
+        android:text=""/>
+    
+    
+    
+    
+    
+    
+    
+    
+  <ScrollView 
+    android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_below="@+id/Map_Zanzibar">
+           
+    <LinearLayout 
+        android:id="@+id/DescriptionContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+    
+    
+    <TextView
+        android:id="@+id/Ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingredients"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/IngredientsContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" /> 
+
+    <TextView
+        android:id="@+id/DescriptionContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/Steps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Steps"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/StepsContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textStyle="bold" />
+</LinearLayout>
+      
+</ScrollView>
+</RelativeLayout>

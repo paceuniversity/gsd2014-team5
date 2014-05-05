@@ -1,0 +1,119 @@
+package ListViewPopulate;
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.widget.Adapter;
+
+import com.example.healthyeating.R;
+import com.example.healthyeating.ListViewAdapters.ImageListAdapter;
+
+
+public abstract class PopulateListViews {
+
+	public static final int ALL_RECIPES = 0;
+	public static final int NEW_RECIPES = 1;
+	public static final int FAV_RECIPES = 2;
+	public static final int TOP_RATED_RECIPES = 3;
+	
+	
+	public static ImageListAdapter populate(ImageListAdapter dstAdabter, Activity ctx, int listViewCode){
+		switch (listViewCode) {
+		case 0: 
+			
+			dstAdabter = populateAllRecipes(dstAdabter, ctx);
+			
+			break;
+
+		case 1:
+			dstAdabter = populateNewestRecipes(dstAdabter, ctx);
+			break;
+			
+		case 2:
+			dstAdabter = populateFavRecipes(dstAdabter, ctx);
+		break;
+		
+		case 3:
+			dstAdabter = populateTopRatedRecipes(dstAdabter, ctx);
+		break;
+		default:
+			break;
+		}
+		return dstAdabter;
+	}
+	
+	
+//Returns the newest add recipes to add to the list view	
+public static ImageListAdapter populateNewestRecipes(ImageListAdapter adapter, Context act){
+		
+		ArrayList<String> dishName = new ArrayList<String>();
+		ArrayList<String> dishServes = new ArrayList<String>();
+		ArrayList<String> dishDescription = new ArrayList<String>();
+		dishName.add("NEW");
+		dishName.add("NEW");
+		dishServes.add("NEW");
+		dishServes.add("NEW");
+		dishDescription.add("NEW");
+		dishDescription.add("NEW");
+		
+		//adapter = new ImageListAdapter(act, R.layout.image_list_item, dishName, dishDescription, dishServes);
+		
+		return adapter;
+	}
+	
+	
+	
+	
+	static ImageListAdapter populateAllRecipes(ImageListAdapter adapter, Context act){
+		
+		adapter = act.
+		
+		return adapter;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+static ImageListAdapter populateTopRatedRecipes(ImageListAdapter adapter, Context act){
+		
+		ArrayList<String> dishName = new ArrayList<String>();
+		ArrayList<String> dishServes = new ArrayList<String>();
+		ArrayList<String> dishDescription = new ArrayList<String>();
+		dishName.add("Top");
+		dishName.add("Top");
+		dishServes.add("Top");
+		dishServes.add("Top");
+		dishDescription.add("Top");
+		dishDescription.add("Top");
+		
+		//adapter = new ImageListAdapter(act, R.layout.image_list_item, dishName, dishDescription, dishServes);
+		
+		return adapter;
+	}
+
+
+
+
+
+
+static ImageListAdapter populateFavRecipes(ImageListAdapter adapter, Context act){
+	
+	ArrayList<String> dishName = new ArrayList<String>();
+	ArrayList<String> dishServes = new ArrayList<String>();
+	ArrayList<String> dishDescription = new ArrayList<String>();
+	dishName.add("Fav");
+	dishName.add("Fav");
+	dishServes.add("Fav");
+	dishServes.add("Fav");
+	dishDescription.add("Fav");
+	dishDescription.add("Fav");
+	
+	//adapter = new ImageListAdapter(act, R.layout.image_list_item, dishName, dishDescription, dishServes);
+	
+	return adapter;
+}
+}
