@@ -19,13 +19,21 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap>{
 	ImageView recipeListViewImageView;
-	
-	  public ImageLoaderTask(ImageView input_recipeListViewImageView) {
-	      this.recipeListViewImageView = input_recipeListViewImageView;
+	ImageButton imageButton;
+	Boolean imageView = null;
+	  public ImageLoaderTask(ImageView input_recipeListViewImageView, Boolean isImageView, ImageButton input_recipeListViewImageButton) {
+	      imageView = isImageView;
+		  if(isImageView){
+		  this.recipeListViewImageView = input_recipeListViewImageView;
+	      }
+	      else{
+	    	  imageButton = input_recipeListViewImageButton;
+	      }
 	  }
 
 	  protected Bitmap doInBackground(String... urls) {
@@ -43,6 +51,8 @@ public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap>{
 	  }
 
 	  protected void onPostExecute(Bitmap result) {
+		  
+		  if(imageView){
 		  if(result!=null){
 	      result = result.createScaledBitmap(result, 100, 95, true);
 	      result = roundCorner(result, 5f);
@@ -50,6 +60,19 @@ public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap>{
 		  }else{
 		  recipeListViewImageView.setImageResource(R.drawable.ic_launcher);
 		  }		
+		  }
+		  
+		  else{
+			  if(result!=null){
+			  int width = imageButton.getWidth();
+			  int height = imageButton.getHeight();
+			  result = result.createScaledBitmap(result, width, height, true);
+		      result = roundCorner(result, 0f);
+			  imageButton.setImageBitmap(result);
+			  }else{
+			  imageButton.setImageResource(R.drawable.ic_launcher);
+			  }
+		  }
 		  return;
 	  }
 	  

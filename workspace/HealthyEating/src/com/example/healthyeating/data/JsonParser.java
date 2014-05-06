@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.healthFacts.HealthFactItem;
+
+import android.graphics.Bitmap;
 import android.util.Log;
 
 public class JsonParser {
@@ -25,6 +28,24 @@ public class JsonParser {
 		return DishNames;
 	}
 	
+	
+	//Parses through all of the helth fact json information and adds it to 
+	//A array list of HealthFactObjects
+	public ArrayList<HealthFactItem> returnHealthFacts(JSONObject healthFactsObj) throws JSONException{
+		ArrayList<HealthFactItem> retHealth = new ArrayList<HealthFactItem>();
+		JSONArray  healthFactsArray = healthFactsObj.getJSONArray("HealthFacts");
+		for(int i =0; i < healthFactsArray.length(); i++){
+			JSONObject healthObj = healthFactsArray.getJSONObject(i);
+			String URL = healthObj.get("HealthFactURL").toString();
+			String ID = healthObj.get("id").toString();
+			String Data = healthObj.get("Data").toString();
+			retHealth.add(new HealthFactItem(URL, ID, Data));
+		}
+		return retHealth;
+	}
+	
+	
+	
 	public ArrayList<ArrayList<String>> getTop5() throws JSONException{
 		if(mainObject!=null){
 		ArrayList<ArrayList<String>> returnData = new ArrayList<ArrayList<String>>();
@@ -39,16 +60,11 @@ public class JsonParser {
 		Log.d("top5 length", Integer.toString(top5.length()));
 		for(int i =0; i<top5.length(); i++){
 			JSONObject dishObj = top5.getJSONObject(i);
-			//JSONObject getIndividualVideoData = dishObj.getJSONObject("DishName");
 			DishNames.add(dishObj.get("DishName").toString());
 			DishDescrip.add(dishObj.get("DishDescription").toString());
 			DishRating.add(dishObj.get("DishRating").toString());
 			DishServes.add(dishObj.get("DishServes").toString());
 			DishImageURL.add(dishObj.get("DishImage").toString());
-			/*recipes.add(new RecipeItem(dishObj.get("id").toString(), dishObj.get("DishName").toString(), dishObj.get("DishDescription").toString(), dishObj.get("DishRating").toString(),
-					dishObj.get("DishServes").toString(), dishObj.get("DishURL").toString(), dishObj.get("DishCookTime").toString(), dishObj.get("DishFullDiscription").toString(),
-					dishObj.get("DishIngredients").toString(), dishObj.get("DishSteps").toString()));
-			index.add(dishObj.get("id").toString());*/
 			Libary.addRecipe(dishObj.get("ID").toString(), new RecipeItem(dishObj.get("ID").toString(), dishObj.get("DishName").toString(), dishObj.get("DishDescription").toString(), dishObj.get("DishRating").toString(),
 					dishObj.get("DishServes").toString(), dishObj.get("DishImage").toString(), dishObj.get("CookTime").toString(), dishObj.get("FullDiscription").toString(),
 					dishObj.get("Ingredients").toString(), dishObj.get("Steps").toString()));

@@ -116,7 +116,7 @@ public class ImageListAdapter extends ArrayAdapter<String> {
 			dishImage.setImageBitmap(dishImages.get(position));
 		}
 		else{
-			ImageLoaderTask imageLoader = new ImageLoaderTask(dishImage);
+			ImageLoaderTask imageLoader = new ImageLoaderTask(dishImage, true, null);
 			if(dishURLs.get(position)!=null){
 			imageLoader.execute(dishURLs.get(position));				
 			}else{

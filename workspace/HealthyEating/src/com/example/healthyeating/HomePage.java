@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -13,7 +14,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 
+import com.example.healthFacts.HealthFactItem;
 import com.example.healthyeating.ListViewAdapters.ImageListAdapter;
+import com.example.healthyeating.data.ImageLoaderTask;
 import com.example.healthyeating.data.JSONLib;
 import com.example.healthyeating.data.JsonParser;
 import com.example.healthyeating.data.RecipeTempHolder;
@@ -24,15 +27,21 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Im;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
@@ -44,8 +53,17 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
 	ListView top20ListView; // list view for top 10 recipes on home page
 	public ImageListAdapter top20adabter;
 	public JSONLib Recipes_Libary;
-	public ImageView HealthFactsTV;
-	//---------------------------///
+	
+	//---------------------------//
+	public ImageButton HealthFactsImageButton;
+	Boolean keepImagesRotating;
+	HealthFactItem currentClickableHealthFact = null;
+	TextView healthFactsData;
+	Thread rotateImeges;
+	TabHost th; 
+	//---------------------------//
+	
+	//-------HealthImages--------//
 	
 	//-----Recipes Tap-----------//
 	Button allRecipesButton;
@@ -69,8 +87,9 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         Recipes_Libary = new JSONLib();
-        
-        HealthFactsTV = (ImageView) findViewById(R.id.homeHealthFactsImageView);
+        keepImagesRotating = true;
+        HealthFactsImageButton = (ImageButton) findViewById(R.id.homeHealthFactsImageButton);
+        HealthFactsImageButton.setOnClickListener(this);
         top20ListView = (ListView) findViewById(R.id.top20); // Initializes the list view
         allReecipesListView = (ListView) findViewById(R.id.allReecipesListView);
         
@@ -91,6 +110,7 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
         favRecipesButton = (Button) findViewById(R.id.favRecipesB);
         favRecipesButton.setOnClickListener(this);
         listViewTitleTextView = (TextView) findViewById(R.id.recipesCatogoryTV);
+        healthFactsData = (TextView) findViewById(R.id.healthData);
     }
 
 
@@ -115,7 +135,7 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
   	public void setUpTabHost(){
   		//_________Initializes and sets up Tap Host_________//
   		
-  				TabHost th = (TabHost) findViewById(R.id.tabhost);
+  				th = (TabHost) findViewById(R.id.tabhost);
   			    th.setup();
   			    th.setOnTabChangedListener(this);
   			    
@@ -141,11 +161,22 @@ public class HomePage extends Activity implements OnItemClickListener, OnTabChan
   	}
 
 
+ //Rotates through and conrols 
+  	public void setUpHealthFactImages(ArrayList<HealthFactItem> _factArray){
+  		
+
+		ImageLoaderTask load = new ImageLoaderTask(null, false, HealthFactsImageButton);
+		load.execute(_factArray.get(0).getURL());
+		currentClickableHealthFact = _factArray.get(0);
+  	}
+  	
+  	
+  	
 @Override
 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 	RecipeTempHolder.setClilckedItem(Recipes_Libary.getRecipe(Integer.toString((arg2+1))));
 	
-	//Log.e(Recipes_Libary.getRecipe("0").getDishID(), Recipes_Libary.getRecipe("0").toString());
+	Log.e("Discription", Recipes_Libary.getRecipe(Integer.toString((arg2+1))).getDishFullDiscription());
 
 	Intent RecipeFullView = new Intent("com.example.healthyeating.RecipeFullView");
 	startActivity(RecipeFullView);
@@ -172,10 +203,34 @@ public void onTabChanged(String tabID) {
 public void onClick(View v) {
 
 switch (v.getId()) {
+case R.id.homeHealthFactsImageButton:
+	healthFactsData.setText(Html.fromHtml(currentClickableHealthFact.getData()));
+	th.setCurrentTab(2);
+
+	break;
 case R.id.allRecipesB:
 	if(allRecipes==null){
 		allRecipes = top20adabter; //PopulateListViews.populate(allRecipes, getApplicationContext(), PopulateListViews.ALL_RECIPES);
 	}
+	
+	allRecipesButton.setScaleX(4.2f);
+	allRecipesButton.setScaleY(4.2f);
+	allRecipesButton.setBackgroundResource(R.drawable.circlebackgroundlight);
+	newestRecipes.setScaleX(.92f);
+	newestRecipes.setScaleY(.92f);
+	newestRecipes.bringToFront();
+	newestRecipes.setBackgroundResource(R.drawable.circlebackground);
+	topRatedRecipes.setScaleX(.96f);
+	topRatedRecipes.setScaleY(.96f);
+	topRatedRecipes.bringToFront();
+	topRatedRecipes.setBackgroundResource(R.drawable.circlebackground);
+	favRecipesButton.setScaleX(.92f);
+	favRecipesButton.setScaleY(.92f);
+	favRecipesButton.bringToFront();
+	favRecipesButton.setBackgroundResource(R.drawable.circlebackground);
+	listViewTitleTextView.bringToFront();
+	allReecipesListView.bringToFront();
+	
 	listViewTitleTextView.setText("All Recipes");
 	allReecipesListView.setAdapter(allRecipes);
 	break;
@@ -184,6 +239,24 @@ case R.id.newestRecipesB:
 	if(newestRecipesAdapter==null){
 		newestRecipesAdapter = top20adabter; //newestRecipesAdapter = PopulateListViews.populate(newestRecipesAdapter, getApplicationContext(), PopulateListViews.NEW_RECIPES);
 	}
+	
+	
+	allRecipesButton.setScaleX(.92f);
+	allRecipesButton.setScaleY(.92f);
+	allRecipesButton.bringToFront();
+	allRecipesButton.setBackgroundResource(R.drawable.circlebackground);
+	newestRecipes.setScaleX(4.2f);
+	newestRecipes.setScaleY(4.2f);
+	newestRecipes.setBackgroundResource(R.drawable.circlebackgroundlight);
+	topRatedRecipes.setScaleX(.92f);
+	topRatedRecipes.setScaleY(.92f);
+	topRatedRecipes.setBackgroundResource(R.drawable.circlebackground);
+	favRecipesButton.setScaleX(.96f);
+	favRecipesButton.setScaleY(.96f);
+	favRecipesButton.setBackgroundResource(R.drawable.circlebackground);
+	listViewTitleTextView.bringToFront();
+	allReecipesListView.bringToFront();
+	
 	listViewTitleTextView.setText("Newest");
 	allReecipesListView.setAdapter(newestRecipesAdapter);
 	break;
@@ -193,6 +266,29 @@ case R.id.topRatedRecipesB:
 	if(topRatedAdapter==null){
 		topRatedAdapter = top20adabter; //topRatedAdapter = PopulateListViews.populate(topRatedAdapter, getApplicationContext(), PopulateListViews.TOP_RATED_RECIPES);
 	}
+	
+	
+	
+	allRecipesButton.setScaleX(.96f);
+	allRecipesButton.setScaleY(.96f);
+	allRecipesButton.bringToFront();
+	allRecipesButton.setBackgroundResource(R.drawable.circlebackground);
+	newestRecipes.setScaleX(.92f);
+	newestRecipes.setScaleY(.92f);
+	newestRecipes.bringToFront();
+	newestRecipes.setBackgroundResource(R.drawable.circlebackground);
+	topRatedRecipes.setScaleX(4.2f);
+	topRatedRecipes.setScaleY(4.2f);
+	topRatedRecipes.setBackgroundResource(R.drawable.circlebackgroundlight);
+	favRecipesButton.setScaleX(.92f);
+	favRecipesButton.setScaleY(.92f);
+	favRecipesButton.bringToFront();
+	favRecipesButton.setBackgroundResource(R.drawable.circlebackground);
+	listViewTitleTextView.bringToFront();
+	allReecipesListView.bringToFront();
+	
+	
+	
 	listViewTitleTextView.setText("Top Rated");
 	allReecipesListView.setAdapter(topRatedAdapter);
 	break;
@@ -201,6 +297,30 @@ case R.id.favRecipesB:
 	if(favRecipesAdapter==null){
 		favRecipesAdapter = top20adabter; //favRecipesAdapter = PopulateListViews.populate(favRecipesAdapter, getApplicationContext(), PopulateListViews.FAV_RECIPES);
 	}
+	
+	
+	
+	allRecipesButton.setScaleX(.92f);
+	allRecipesButton.setScaleY(.92f);
+	allRecipesButton.bringToFront();
+	allRecipesButton.setBackgroundResource(R.drawable.circlebackground);
+	newestRecipes.setScaleX(.96f);
+	newestRecipes.setScaleY(.96f);
+	newestRecipes.bringToFront();
+	newestRecipes.setBackgroundResource(R.drawable.circlebackground);
+	topRatedRecipes.setScaleX(.92f);
+	topRatedRecipes.setScaleY(.92f);
+	topRatedRecipes.bringToFront();
+	topRatedRecipes.setBackgroundResource(R.drawable.circlebackground);
+	favRecipesButton.setScaleX(4.2f);
+	favRecipesButton.setScaleY(4.2f);
+	favRecipesButton.setBackgroundResource(R.drawable.circlebackgroundlight);
+	listViewTitleTextView.bringToFront();
+	allReecipesListView.bringToFront();
+	
+	
+	
+	
 	listViewTitleTextView.setText("Favorites");
 	allReecipesListView.setAdapter(favRecipesAdapter);
 	break;
@@ -213,15 +333,10 @@ default:
 
 
 
-
-    
-  	
-  	
-  
-  	
-	
-  	
-  	
-  	
+    @Override
+    protected void onPause() {
+    	keepImagesRotating = false;
+    	super.onPause();
+    }
   	
 }

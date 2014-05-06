@@ -1,0 +1,16 @@
+package com.example.healthFacts;
+
+import android.graphics.Bitmap;
+
+public class HealthFactItem {
+
+	String factImageURL;
+	String ID;
+	
+	public HealthFactItem(Bitmap _factImageURL, String _ID) {
+		factImage = _factImage;
+		ID = _ID;
+	}
+	
+	
+}

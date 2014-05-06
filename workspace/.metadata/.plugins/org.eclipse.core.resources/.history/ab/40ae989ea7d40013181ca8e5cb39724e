@@ -1,0 +1,5 @@
+package com.example.healthyeating.data;
+
+public class ImageLoaderBitmap {
+
+}

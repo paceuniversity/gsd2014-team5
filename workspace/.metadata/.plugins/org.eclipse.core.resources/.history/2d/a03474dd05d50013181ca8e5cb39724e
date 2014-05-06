@@ -1,0 +1,117 @@
+package com.example.healthyeating;
+
+import com.example.healthyeating.data.ImageLoaderTask;
+import com.example.healthyeating.data.RecipeItem;
+import com.example.healthyeating.data.RecipeTempHolder;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+public class RecipeFullViewTask extends Activity {
+	TextView DishName;
+	TextView Aurthor;
+	TextView CookTime;
+	TextView ServingSize;
+	TextView DishDiscription;
+	TextView DishIngrediants;
+	TextView DishSteps;
+	ImageView MainImage;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		setContentView(R.layout.recipe);
+		super.onCreate(savedInstanceState);
+		RecipeItem temp = RecipeTempHolder.getClickedItem();
+		DishName = (TextView) findViewById(R.id.NameContent);
+		Aurthor = (TextView) findViewById(R.id.AuthorContent);
+		CookTime = (TextView) findViewById(R.id.TimeContent);
+		ServingSize = (TextView) findViewById(R.id.ServingContent);
+		DishDiscription = (TextView) findViewById(R.id.description_content);
+		DishIngrediants = (TextView) findViewById(R.id.ingredients_content);
+		DishSteps = (TextView) findViewById(R.id.steps_content);
+		MainImage = (ImageView) findViewById(R.id.Map_Zanzibar);
+	
+		ImageLoaderTask load = new ImageLoaderTask(MainImage, true, null);
+		load.execute(temp.getDishImage());
+		DishName.setText(temp.getDishName());
+		CookTime.setText(temp.getDishCookTime());
+		ServingSize.setText(temp.getDishServes());
+		DishDiscription.setText(temp.getDishFullDiscription());
+		DishIngrediants.setText(Html.fromHtml(formatIngrediants(temp.getDishIngredients())));
+		DishSteps.setText(Html.fromHtml(formatSteps(temp.getDishSteps())));
+        RelativeLayout holder = (RelativeLayout) findViewById(R.id.headerHolder);
+        holder.bringToFront();
+        LinearLayout scrollviewLinerLay = (LinearLayout) findViewById(R.id.scrollviewlinerlay);
+        int height = holder.getHeight();
+        scrollviewLinerLay.setPadding(0, 300, 0, 0);
+		//MainImage.setImageDrawable(drawable);
+	}
+	
+	
+	public String formatSteps(String unFormatedData){
+		String ret = "";
+		String stepCount = "<b><big>1. </big></b> ";
+		int stepCounter = 1;
+		int dataPostion = 0;
+		
+		Log.e("Letters", Integer.toString(unFormatedData.length()));
+		String tempStep = stepCount;
+		while(dataPostion<unFormatedData.length()){
+		
+			
+			if(!unFormatedData.substring(dataPostion, dataPostion+1).equals(">")){
+				tempStep = tempStep.concat(unFormatedData.substring(dataPostion, dataPostion+1));
+			}
+			else{
+				ret = ret.concat(tempStep + "."  + "<br>" + "<br>");
+				stepCounter++;
+				tempStep = "<b> <big>"+Integer.toString(stepCounter) + ". "+"</big> </b>";
+				
+			}
+			dataPostion++;
+			
+		}
+		
+		
+		return ret;
+	}
+	
+	
+	
+	
+	public String formatIngrediants(String unFormatedData){
+		String ret = "";
+		String stepCount = "<b><big> &#8226; </b></big>";
+		int stepCounter = 1;
+		int dataPostion = 0;
+		
+		Log.e("Letters", Integer.toString(unFormatedData.length()));
+		String tempStep = stepCount;
+		while(dataPostion<unFormatedData.length()){
+		
+			
+			if(!unFormatedData.substring(dataPostion, dataPostion+1).equals(">")){
+				tempStep = tempStep.concat(unFormatedData.substring(dataPostion, dataPostion+1));
+			}
+			else{
+				ret = ret.concat( tempStep + "<br>");
+				stepCounter++;
+				tempStep = "<b><big> &#8226; </b></big>";
+				
+			}
+			dataPostion++;
+			
+		}
+		
+		ret = ret.concat("");
+		Log.e("html", ret);
+		return ret;
+	}
+}

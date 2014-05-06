@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
@@ -17,12 +19,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.healthFacts.HealthFactItem;
 import com.example.healthyeating.HomePage;
 import com.example.healthyeating.R;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -32,6 +37,7 @@ import android.widget.TextView;
 public class RetriveData extends AsyncTask<Void, Void, Void> {
 	JsonParser Top5 = null;
 	JSONObject temp = null;
+	JSONObject healthFactObject;
 	private Context context;
 	private HomePage activity;
 	ProgressDialog dialog;
@@ -58,8 +64,8 @@ public class RetriveData extends AsyncTask<Void, Void, Void> {
 	}
 	@Override
 	protected Void doInBackground(Void... params) {
-		temp = getJSONObject("http://turbotri.com/gsd2014team5/getHealthFacts.php");
-		Log.d("HealthFacts", temp.toString());
+		healthFactObject = getJSONObject("http://turbotri.com/gsd2014team5/getHealthFacts.php");
+		
 		
 		try {
 			if(Top5==null){
@@ -78,15 +84,22 @@ public class RetriveData extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 		dialog.dismiss();
-		ImageLoaderTask imageLoader = new ImageLoaderTask(activity.HealthFactsTV);
-		imageLoader.execute("http://turbotri.com/gsd2014team5/images/chapati.jpg");
-
+		try {
+			ArrayList<HealthFactItem> listTemp = Top5.returnHealthFacts(healthFactObject);
+			
+			activity.setUpHealthFactImages(listTemp);
+			
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			//e1.printStackTrace();
+		}
+		
 		try {
 			ArrayList<ArrayList<String>> t = Top5.getTop5();
 			activity.populateTop20ListView(t.get(0), t.get(1), t.get(2), t.get(4));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 	}
